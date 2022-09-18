@@ -1,0 +1,139 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./src/weather-icons.min.css">
+    <title>Weather Now</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container forecast-main">
+            <div class="main-head">
+                    <button type="submit" class="current-button">current</button>
+                    <input type="text" class="form" placeholder="search city">
+                    <input type="submit" class="search-button" value="search">
+            </div>
+            
+            <div class="row  main-info">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-6 current-city">
+                            <h1></h1>
+                            <h2></h2>
+                            <p>
+                                Last update: 
+                            </p>
+                            <p id="udating-date">
+                                13:45 25/07/2022
+                            </p>
+                        </div>
+                        <div class="col-5">
+                            <i class="wi wi-day-sunny main-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 details">
+                    <ul>
+                        <li>Temperature MAX: <span id="max-temp"></span>&deg;</li>
+                        <li>Cloudiness: <span id="cloud"></span>%</li>
+                        <li>Sunrise: <span id="sunrise"></span></li>
+                    </ul>
+                </div>
+                <div class="col-3 details">
+                    <ul>
+                        <li>Temperature MIN: <span id="min-temp"></span>&deg;</li>
+                        <li>Humidity: <span id="humidity"></span>%</li>
+                        <li>Sunset: <span id="sunset"></span></li>
+                </div>
+            </div>
+        </div>     
+        <div class="container forecast-days">   
+            <div class="row">
+                <div class="col days">
+                    <h2>Monday</h2>
+                    <div class="row">
+                        <div class="col">
+                            <p class="max-temp">27&deg;</p>
+                            <p class="min-temp">20&deg;</p>
+                        </div>  
+                        <div class="col"> 
+                            <i class="wi wi-day-sunny-overcast nextdays-icons"></i>
+                        </div>    
+                    </div>
+                </div>
+                <div class="col days">
+                    <h2>Tuesday</h2>
+                    <div class="row">
+                        <div class="col">
+                            <p class="max-temp">32&deg;</p>
+                            <p class="min-temp">22&deg;</p>
+                        </div>  
+                        <div class="col"> 
+                            <i class="wi wi-day-cloudy nextdays-icons"></i>
+                        </div>    
+                    </div>
+                </div>
+                <div class="col days">
+                    <h2>Wednesday</h2>
+                    <div class="row">
+                        <div class="col">
+                            <p class="max-temp">30&deg;</p>
+                            <p class="min-temp">21&deg;</p>
+                        </div>  
+                        <div class="col"> 
+                            <i class="wi wi-day-sunny nextdays-icons"></i>
+                        </div>    
+                    </div>
+                </div>
+                <div class="col days">
+                    <h2>Thursday</h2>
+                    <div class="row">
+                        <div class="col">
+                            <p class="max-temp">29&deg;</p>
+                            <p class="min-temp">20&deg;</p>
+                        </div>  
+                        <div class="col"> 
+                            <i class="wi wi-day-sunny nextdays-icons"></i>
+                        </div>    
+                    </div>
+                </div>
+                <div class="col days">
+                    <h2>Friday</h2>
+                    <div class="row">
+                        <div class="col">
+                            <p class="max-temp">23&deg;</p>
+                            <p class="min-temp">15&deg;</p>
+                        </div>  
+                        <div class="col"> 
+                            <i class="wi wi-day-sleet-storm nextdays-icons"></i>
+                        </div>    
+                    </div>
+                </div>
+                <div class="col days">
+                    <h2>Saturday</h2>
+                    <div class="row">
+                        <div class="col">
+                            <p class="max-temp">22&deg;</p>
+                            <p class="min-temp">14&deg;</p>
+                        </div>  
+                        <div class="col"> 
+                            <i class="wi wi-day-rain nextdays-icons"></i>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            Coded by <a href="https://www.linkedin.com/in/iryna-shumakova-b6ba381a1/">Iryna Shumakova</a> .All rights resevred ©
+            <br>
+            *All time is displayed in local times zones.</footer>
+    </div>
+    <script src="./src/script.js"></script>
+</body>
+</html>
