@@ -19,22 +19,26 @@ let months = [
   "July",
   "August",
   "September",
+  "October",
   "November",
   "December"
 ];
 let month = months[dateNow.getMonth()];
-let updateTime = document.querySelector("#udating-date");
+let updateTime = document.querySelector("#updating-date");
 updateTime.innerHTML = `${dateNow.toLocaleTimeString()} ${day} <br> ${dateNow.getDate()} ${month} ${dateNow.getFullYear()}`;
 
 function displayWeather(response) {
   document.querySelector("h1").innerHTML = response.data.name;
-  document.querySelector("h2").innerHTML = `${Math.round(response.data.main.temp)} &deg;`;
+  celsiusTemp = response.data.main.temp;
+  document.querySelector("#curr-temp").innerHTML = Math.round(celsiusTemp);
+  document.querySelector(".weather-description").innerHTML = response.data.weather[0].description;
   document.querySelector("#max-temp").innerHTML = Math.round(response.data.main.temp_max);
   document.querySelector("#min-temp").innerHTML = Math.round(response.data.main.temp_min);
   document.querySelector("#cloud").innerHTML = Math.round(response.data.clouds.all);
-  document.querySelector("#sunrise").innerHTML = new Date(response.data.sys.sunrise * 1000).toLocaleTimeString();
-  document.querySelector("#sunset").innerHTML = new Date(response.data.sys.sunset * 1000).toLocaleTimeString();
+  document.querySelector("#sunrise").innerHTML = new Date(response.data.sys.sunrise * 1000).toLocaleTimeString().slice(0, 5);
+  document.querySelector("#sunset").innerHTML = new Date(response.data.sys.sunset * 1000).toLocaleTimeString().slice(0, 5);
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+  document.querySelector(".main-icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`)
 }
 
 function searchCity(city) {
@@ -53,6 +57,7 @@ function submitting(event){
   event.preventDefault();
   let city = document.querySelector(".form").value;
   searchCity(city);
+  document.querySelector(".form").value ='';
 }
 
 function getCurrentLocation(event) {
@@ -68,5 +73,23 @@ currentButton.addEventListener("click", getCurrentLocation);
 
 searchCity("Lviv")
 
+let celsiusTemp = null;
 
+function displayFarenheitTemp(event) {
+  event.preventDefault();
+  let currentTemp = document.querySelector("#curr-temp");
+  let farenheitTemperature = (celsiusTemp * 9 ) / 5 + 32;
+  currentTemp.innerHTML = Math.round(farenheitTemperature);
+}
 
+function displayCelsiusTemp (event) {
+  event.preventDefault();
+  let currentTemp = document.querySelector("#curr-temp");
+  currentTemp.innerHTML = Math.round(celsiusTemp);
+}
+
+let farenheit = document.querySelector(".wi-fahrenheit");
+farenheit.addEventListener("click", displayFarenheitTemp);
+
+let celsius = document.querySelector(".wi-celsius");
+celsius.addEventListener("click", displayCelsiusTemp);

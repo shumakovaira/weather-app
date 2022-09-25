@@ -90,13 +90,15 @@ input[type=submit]:hover{
     text-align: center;
 }
 
+.col-5 {
+    text-align: center;
+    text-transform: capitalize;
+}
+
 .details{
     margin-top: 30px;
 }
 
-.col-5{
-    margin-top: 15px;
-}
 
 h1, .forecast-days h2{
     color: #b47644;
@@ -111,14 +113,12 @@ h1, .forecast-days h2{
     margin-bottom: 10px;
 }
 
-#udating-date{
+#updating-date {
     margin-top: 0;
 }
 
-.main-icon{
-    margin-top: 25px;
-    margin-left: 25px;
-    font-size: 150px;
+.main-icon {
+    height: 180px;
 }
 
 li{
@@ -184,4 +184,13 @@ footer a{
 
 footer a:hover {
     color: #c0c4c2fb;
+}
+
+h2 .separator {
+    font-weight:lighter;
+    color: #c0c4c234;
+}
+
+.wi {
+    cursor: pointer;
 }
