@@ -71,6 +71,15 @@ changeButton.addEventListener("click", submitting);
 let currentButton = document.querySelector(".current-button");
 currentButton.addEventListener("click", getCurrentLocation);
 
+let inputCity = document.querySelector(".form")
+inputCity.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    let city = document.querySelector(".form").value;
+    searchCity(city);
+    document.querySelector(".form").value ='';
+  }
+});
+
 searchCity("Lviv")
 
 let celsiusTemp = null;
