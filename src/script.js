@@ -38,7 +38,7 @@ function displayWeather(response) {
   document.querySelector("#sunrise").innerHTML = new Date(response.data.sys.sunrise * 1000).toLocaleTimeString().slice(0, 5);
   document.querySelector("#sunset").innerHTML = new Date(response.data.sys.sunset * 1000).toLocaleTimeString().slice(0, 5);
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-  document.querySelector(".main-icon").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`)
+  document.querySelector(".main-icon").setAttribute("src", `../img/icons/${response.data.weather[0].icon}.svg`)
 }
 
 function searchCity(city) {
@@ -68,7 +68,7 @@ function getCurrentLocation(event) {
 let changeButton = document.querySelector(".search-button");
 changeButton.addEventListener("click", submitting);
 
-let currentButton = document.querySelector(".current-button");
+let currentButton = document.querySelector(".location-pin");
 currentButton.addEventListener("click", getCurrentLocation);
 
 let inputCity = document.querySelector(".form")
