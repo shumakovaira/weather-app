@@ -6,8 +6,7 @@ let days = [
   "Wednesday", 
   "Thursday", 
   "Friday", 
-  "Saturday", 
-  "Sunday"];
+  "Saturday"];
 let day = days[dateNow.getDay()];
 let months = [
   "January",
@@ -25,12 +24,57 @@ let months = [
 ];
 let month = months[dateNow.getMonth()];
 let updateTime = document.querySelector("#updating-date");
-updateTime.innerHTML = `${dateNow.toLocaleTimeString()} ${day} <br> ${dateNow.getDate()} ${month} ${dateNow.getFullYear()}`;
+updateTime.innerHTML = `${dateNow.toLocaleTimeString().slice(0, 5)} ${day} <br> ${dateNow.getDate()} ${month} ${dateNow.getFullYear()}`;
+
+function convertingDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector(".forecast-days");
+  let forecastTemplate = `<div class="row">`;
+  
+  forecast.forEach(function(forecastDay, index) {
+    if (index >= 1 && index < 7) {
+      forecastTemplate = 
+        forecastTemplate + `
+        <div class="col days">
+        <h2>${convertingDay(forecastDay.dt)}</h2>
+        <div class="row">
+            <div class="col daily-temp">
+                <p class="max-temp">${Math.round(forecastDay.temp.max)}&deg;</p>
+                <p class="min-temp">${Math.round(forecastDay.temp.min)}&deg;</p>
+            </div>  
+            <div class="col weather-icon"> 
+            <img 
+              src="../img/icons/${forecastDay.weather[0].icon}.svg"
+              class="nextdays-icon"
+            />
+            </div>    
+          </div>
+          <div class="row">
+            <p class="weather-disc">${forecastDay.weather[0].description}</p>
+          </div>
+        </div>
+      `;
+    }
+  })
+  forecastTemplate = forecastTemplate + `</div>`;
+  forecastElement.innerHTML = forecastTemplate;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "502dc8f7ae36e57af1974e18d16a86f8";
+  let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely,hourly&appid=${apiKey}&units=metric`
+  axios.get(apiURL).then(displayForecast)
+}
 
 function displayWeather(response) {
   document.querySelector("h1").innerHTML = response.data.name;
-  celsiusTemp = response.data.main.temp;
-  document.querySelector("#curr-temp").innerHTML = Math.round(celsiusTemp);
+  document.querySelector("#curr-temp").innerHTML = Math.round(response.data.main.temp);
   document.querySelector(".weather-description").innerHTML = response.data.weather[0].description;
   document.querySelector("#max-temp").innerHTML = Math.round(response.data.main.temp_max);
   document.querySelector("#min-temp").innerHTML = Math.round(response.data.main.temp_min);
@@ -39,6 +83,8 @@ function displayWeather(response) {
   document.querySelector("#sunset").innerHTML = new Date(response.data.sys.sunset * 1000).toLocaleTimeString().slice(0, 5);
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector(".main-icon").setAttribute("src", `../img/icons/${response.data.weather[0].icon}.svg`)
+
+  getForecast(response.data.coord)
 }
 
 function searchCity(city) {
@@ -82,23 +128,11 @@ inputCity.addEventListener("keydown", function(event) {
 
 searchCity("Lviv")
 
-let celsiusTemp = null;
-
-function displayFarenheitTemp(event) {
-  event.preventDefault();
-  let currentTemp = document.querySelector("#curr-temp");
-  let farenheitTemperature = (celsiusTemp * 9 ) / 5 + 32;
-  currentTemp.innerHTML = Math.round(farenheitTemperature);
-}
-
 function displayCelsiusTemp (event) {
   event.preventDefault();
   let currentTemp = document.querySelector("#curr-temp");
   currentTemp.innerHTML = Math.round(celsiusTemp);
 }
-
-let farenheit = document.querySelector(".wi-fahrenheit");
-farenheit.addEventListener("click", displayFarenheitTemp);
 
 let celsius = document.querySelector(".wi-celsius");
 celsius.addEventListener("click", displayCelsiusTemp);

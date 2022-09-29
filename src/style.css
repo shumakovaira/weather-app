@@ -134,10 +134,9 @@ li{
 
 .days{
     background-color: #111725;
-    height: 120px;
+    height: 130px;
     border-radius: 30px;
     margin-right: 10px;
-    padding: 5px;
     -webkit-box-shadow: 0px 0px 10px 2px rgba(17,23,39,0.4); 
     box-shadow: 0px 0px 10px 2px rgba(17,23,39,0.4);
     line-height: 15px;
@@ -148,13 +147,14 @@ li{
 }
 
 .days h2{
+    padding-top: 4px;
     font-size: 20px;
     text-align: center;
 }
 
 .forecast-days .max-temp{
     font-size: 25px;
-    margin-left: 10px;
+    margin-left: 15px;
     font-weight: 700;
     margin-bottom: 1px;
     margin-top: 15px;
@@ -163,9 +163,18 @@ li{
 .forecast-days .min-temp{
     font-size: 18px;
     font-weight: 200;
-    margin-left: 12px;
+    margin-left: 18px;
     margin-top: 0px;
     color: #c0c4c288;
+}
+
+.forecast-days .weather-icon {
+    padding-left: 0px;
+}
+
+.forecast-days .daily-temp {
+    margin-top: 8px;
+    padding: 0px;
 }
 
 .nextdays-icons{
@@ -173,6 +182,12 @@ li{
     color: #c0c4c2c5;
     margin-top: 10px;
     margin-right: 10px;
+}
+
+.days .weather-disc {
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 14px;
 }
 
 footer{
@@ -189,11 +204,6 @@ footer a{
 
 footer a:hover {
     color: #c0c4c2fb;
-}
-
-h2 .separator {
-    font-weight:lighter;
-    color: #c0c4c234;
 }
 
 .wi {
